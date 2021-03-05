@@ -2,16 +2,16 @@ program grid_construction
 implicit none
 
     integer :: nx, ny, nz, n4
-    real(kind = 8) :: hx, hy, hz
+    real(kind = 8) :: hx, hy, hz, cutoff
     character(len=30) :: fileout
 
     complex(kind=8), allocatable :: psi(:,:,:)
 
     real(kind = 8) :: x, y, z, xmin, xmax, ymin, ymax, zmin, zmax
-    real(kind = 8) :: a, b
+    real(kind = 8) :: a, b, d
     integer :: i, j, k
 
-    namelist /input/ nx, ny, nz, hx, hy, hz, n4, fileout
+    namelist /input/ nx, ny, nz, hx, hy, hz, n4, fileout, cutoff
 
     open(unit=10, file="input.txt", status="old")
     print *, "opened"
@@ -48,7 +48,12 @@ implicit none
             y = ymin + dble(j - 1) * hy 
             do k = 1, nz
                 z = zmin + dble(k - 1) * hz 
-                psi(i,j,k) = (exp(-a*(x**2 + y**2 + z**2)) - exp(b*(x**2 + y**2 + z**2))) * cmplx(1,1)
+                d = x**2 + y**2 + z**2
+                if (sqrt(d) < 4.d0) then
+                    psi(i,j,k) = 0.d0
+                else
+                    psi(i,j,k) = (exp(-a*d) - exp(b*d)) * cmplx(1,1)
+                end if
                 ! if (j == ny/2 .and. k == nz/2) print *, x, y, z, psi(i,j,k)
             end do
         end do

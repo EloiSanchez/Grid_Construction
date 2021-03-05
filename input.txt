@@ -16,4 +16,6 @@ n4=100
 ! Output name
 fileout="partial.psih.initial48" 
 
+! Cutoff
+cutoff=4.0
 /
