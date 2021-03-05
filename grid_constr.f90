@@ -8,7 +8,7 @@ implicit none
     complex(kind=8), allocatable :: psi(:,:,:)
 
     real(kind = 8) :: x, y, z, xmin, xmax, ymin, ymax, zmin, zmax
-    real(kind = 8) :: a
+    real(kind = 8) :: a, b
     integer :: i, j, k
 
     namelist /input/ nx, ny, nz, hx, hy, hz, n4, fileout
@@ -39,7 +39,8 @@ implicit none
 
     allocate(psi(nx,ny,nz))
     
-    a = 10.d0
+    a = 5.d-3
+    b = 1.d-3
 
     do i = 1, nx
         x = xmin + dble(i - 1) * hx 
@@ -47,7 +48,7 @@ implicit none
             y = ymin + dble(j - 1) * hy 
             do k = 1, nz
                 z = zmin + dble(k - 1) * hz 
-                psi(i,j,k) = (exp(-(x**2 + y**2 + z**2)/a) - exp(-2.d0*(x**2 + y**2 + z**2)/a)) * cmplx(1,1)
+                psi(i,j,k) = (exp(-a*(x**2 + y**2 + z**2)) - exp(b*(x**2 + y**2 + z**2))) * cmplx(1,1)
                 ! if (j == ny/2 .and. k == nz/2) print *, x, y, z, psi(i,j,k)
             end do
         end do
@@ -57,7 +58,7 @@ implicit none
 
     print *, "Final number of He atoms is", real(sum(psi*conjg(psi)))*hx*hy*hz
 
-    open(10,file=fileout,form='UNFORMATTED', status="old")
+    open(10,file=fileout,form='UNFORMATTED', status="new")
     write(10) 0.d0,xmax,ymax,zmax,hx,hy,hz,nx,ny,nz,.true.
     write(10) psi
     close(10)
