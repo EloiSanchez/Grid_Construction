@@ -57,7 +57,7 @@ implicit none
 
     print *, "Final number of He atoms is", real(sum(psi*conjg(psi)))*hx*hy*hz
 
-    open(10,file=fileout,form='UNFORMATTED')
+    open(10,file=fileout,form='UNFORMATTED', status="old")
     write(10) 0.d0,xmax,ymax,zmax,hx,hy,hz,nx,ny,nz,.true.
     write(10) psi
     close(10)
