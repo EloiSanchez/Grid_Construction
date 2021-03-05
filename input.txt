@@ -1,0 +1,19 @@
+&input
+
+! Number of gridpoints
+nx=48
+ny=48
+nz=48
+
+! Distance between gridpoints
+hx=0.8
+hy=0.8
+hz=0.8
+
+! Number of He4 atoms
+n4=100
+
+! Output name
+fileout="partial.psih.initial48" 
+
+/
