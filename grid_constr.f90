@@ -39,8 +39,8 @@ implicit none
 
     allocate(psi(nx,ny,nz))
     
-    a = 5.d-3
-    b = 1.d-3
+    a = 5.d-2
+    b = 1.d-2
 
     do i = 1, nx
         x = xmin + dble(i - 1) * hx 
