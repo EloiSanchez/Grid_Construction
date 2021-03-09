@@ -40,7 +40,7 @@ implicit none
     allocate(psi(nx,ny,nz))
     
     a = 5.d-2
-    b = 1.d-2
+    b = 1.d-1
 
     do i = 1, nx
         x = xmin + dble(i - 1) * hx 
@@ -52,7 +52,7 @@ implicit none
                 if (sqrt(d) < 4.d0) then
                     psi(i,j,k) = 0.d0
                 else
-                    psi(i,j,k) = (exp(-a*d) - exp(b*d)) * cmplx(1,1)
+                    psi(i,j,k) = abs(exp(-a*d) - exp(-b*d)) * cmplx(1,1)
                 end if
                 ! if (j == ny/2 .and. k == nz/2) print *, x, y, z, psi(i,j,k)
             end do

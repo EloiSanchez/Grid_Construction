@@ -1,20 +1,20 @@
 &input
 
 ! Number of gridpoints
-nx=48
-ny=48
-nz=48
+nx=84
+ny=84
+nz=84
 
 ! Distance between gridpoints
-hx=0.8
-hy=0.8
-hz=0.8
+hx=0.48
+hy=0.48
+hz=0.48
 
 ! Number of He4 atoms
 n4=100
 
 ! Output name
-fileout="partial.psih.initial48" 
+fileout="partial.psih.initial84" 
 
 ! Cutoff
 cutoff=4.0
